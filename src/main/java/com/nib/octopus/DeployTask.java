@@ -31,6 +31,15 @@ public class DeployTask implements CommonTaskType
         buildLogger.addBuildLogEntry("Project Name: " + projectName);
         buildLogger.addBuildLogEntry("Version: " + version);
         buildLogger.addBuildLogEntry("Environment: " + environment);
+        
+        try {
+        	DeployReleaseCommand command = new DeployReleaseCommand(environment, projectName, version, serverUrl, apiKey, buildLogger);
+        	command.Execute();
+        }
+        catch (Exception e) {
+        	buildLogger.addErrorLogEntry("Error occured during deployment", e);
+        	return builder.failed().build();
+        }
 
         return builder.success().build();
 	}

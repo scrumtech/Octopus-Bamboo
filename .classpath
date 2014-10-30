@@ -1228,5 +1228,6 @@
 			<attribute name="javadoc_location" value="jar:file:/C:/Users/wfalconer/.m2/repository/org/apache/geronimo/specs/geronimo-annotation_1.1_spec/1.0/geronimo-annotation_1.1_spec-1.0-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org\json\simple\json-simple\1.1.1\json-simple-1.1.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

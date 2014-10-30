@@ -58,6 +58,13 @@
             <artifactId>gson</artifactId>
             <version>2.2.2-atlassian-1</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.json.simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        
     </dependencies>
 
     <build>
@@ -70,6 +77,7 @@
                 <configuration>
                     <productVersion>${bamboo.version}</productVersion>
                     <productDataVersion>${bamboo.data.version}</productDataVersion>
+                    <allowGoogleTracking>false</allowGoogleTracking>
                 </configuration>
             </plugin>
           
