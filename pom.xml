@@ -15,7 +15,7 @@
     </organization>
 
     <name>Octopus-Bamboo</name>
-    <description>This is the com.nib.octopus:Octopus-Bamboo plugin for Atlassian Bamboo.</description>
+    <description>This is the Octopus Deploy plugin for Atlassian Bamboo.</description>
     <packaging>atlassian-plugin</packaging>
 
     <properties>
