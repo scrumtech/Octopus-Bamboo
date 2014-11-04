@@ -31,6 +31,10 @@ public class HttpClient {
 		DefaultHttpClient httpClient = new DefaultHttpClient();
 
 		HttpResponse response = httpClient.execute(getRequest);
+		
+		if (response.getStatusLine().getStatusCode() == 404) {
+			return null;
+		}
 
 		if (response.getStatusLine().getStatusCode() != 200) {
 			throw new RuntimeException(

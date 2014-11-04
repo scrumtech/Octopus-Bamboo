@@ -30,7 +30,6 @@ public class Projects {
 			throws ClientProtocolException, IOException {
 		String slug = createProjectSlug(projectName);
 
-		buildLogger.addBuildLogEntry("Octopus URL " + this.baseUrl);
 		HttpGet getRequest = new HttpGet(this.baseUrl + "/api/projects/"
 				+ slug);
 		getRequest.addHeader("accept", "application/json");
@@ -43,6 +42,23 @@ public class Projects {
 
 		buildLogger.addBuildLogEntry("Project found: " + project.Id);
 		return project;
+	}
+	
+	public DeploymentProcess getDeploymentProcess(String projectId, BuildLogger buildLogger) throws ClientProtocolException, IOException
+	{
+		String id = "deploymentprocess-" + projectId;
+		
+		HttpGet getRequest = new HttpGet(this.baseUrl + "/api/deploymentprocesses/" + id + "/template");
+		getRequest.addHeader("accept", "application/json");
+		getRequest.addHeader("X-Octopus-ApiKey", this.apiKey);
+		
+		String json = HttpClient.executeRequest(getRequest);
+		
+		Gson gson = new Gson();
+		DeploymentProcess template = gson.fromJson(json, DeploymentProcess.class);
+		
+		buildLogger.addBuildLogEntry("Build process template retrieved.");
+		return template;
 	}
 
 	private String createProjectSlug(String projectName2) {

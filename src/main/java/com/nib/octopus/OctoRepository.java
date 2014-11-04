@@ -5,31 +5,51 @@ import java.util.regex.Pattern;
 public class OctoRepository {
 	private String baseUrl;
 	private String apiKey;
-	
-	public OctoRepository(String url, String apiKey)
-	{
+
+	private Deployments deployments;
+	private Environments environments;
+	private Projects projects;
+	private Releases releases;
+	private NugetFeeds nugetFeeds;
+
+	public OctoRepository(String url, String apiKey) {
 		this.baseUrl = SanitiseUrl(url);
 		this.apiKey = apiKey;
 	}
-	
-	public Deployments getDeployments()
-	{
-		return new Deployments(this.baseUrl, this.apiKey);
+
+	public Deployments getDeployments() {
+		if (deployments == null) {
+			deployments = new Deployments(this.baseUrl, this.apiKey);
+		}
+		return deployments;
+	}
+
+	public Environments getEnvironments() {
+		if (environments == null) {
+			environments = new Environments(this.baseUrl, this.apiKey);
+		}
+		return environments;
+	}
+
+	public Releases getReleases() {
+		if (releases == null) {
+			releases = new Releases(this.baseUrl, this.apiKey);
+		}
+		return releases;
+	}
+
+	public Projects getProjects() {
+		if (projects == null) {
+			projects = new Projects(this.baseUrl, this.apiKey);
+		}
+		return projects;
 	}
 	
-	public Environments getEnvironments()
+	public NugetFeeds getNugetFeeds()
 	{
-		return new Environments(this.baseUrl, this.apiKey);
-	}
-	
-	public Releases getReleases()
-	{
-		return new Releases(this.baseUrl, this.apiKey);
-	}
-	
-	public Projects getProjects()
-	{
-		return new Projects(this.baseUrl, this.apiKey);
+		if (nugetFeeds == null)
+			nugetFeeds = new NugetFeeds(this.baseUrl, this.apiKey);
+		return nugetFeeds;
 	}
 
 	private String SanitiseUrl(String url) {
@@ -37,17 +57,17 @@ public class OctoRepository {
 		if (url.startsWith("/")) {
 			url = url.replaceAll("^/+", "");
 		}
-		
+
 		// check starts with http://
 		if (!Pattern.compile("^(?i)http[sS]?://{1}").matcher(url).find()) {
 			url = "http://" + url;
 		}
-		
+
 		// check ends with /
 		if (url.endsWith("/")) {
 			url = url.replaceFirst("/$", "");
 		}
-		
+
 		return url;
 	}
 }

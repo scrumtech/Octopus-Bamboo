@@ -1,6 +1,7 @@
 package com.nib.octopus;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
@@ -16,7 +17,7 @@ public class Releases {
 		this.apiKey = apiKey;
 		this.baseUrl = baseUrl;
 	}
-	
+
 	/***
 	 * Gets a Release ID for a project and version number.
 	 * 
@@ -26,9 +27,9 @@ public class Releases {
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-	public Release FindByProjectIdAndVersion(String projectID, String versionNumber, BuildLogger buildLogger)
-			throws ClientProtocolException, IOException 
-	{
+	public Release FindByProjectIdAndVersion(String projectID,
+			String versionNumber, BuildLogger buildLogger)
+			throws ClientProtocolException, IOException {
 		HttpGet getRequest = new HttpGet(this.baseUrl + "/api/projects/"
 				+ projectID + "/releases/" + versionNumber);
 		getRequest.addHeader("accept", "application/json");
@@ -36,18 +37,22 @@ public class Releases {
 
 		String json = HttpClient.executeRequest(getRequest);
 
-		// parse to a release object
-		Gson gson = new Gson();
-		Release release = gson.fromJson(json, Release.class);
+		if (json != null) {
 
-		buildLogger.addBuildLogEntry("Release found: " + release.Id);
-		return release;
+			// parse to a release object
+			Gson gson = new Gson();
+			Release release = gson.fromJson(json, Release.class);
+
+			buildLogger.addBuildLogEntry("Release found: " + release.Id);
+			return release;
+		} else {
+			return null;
+		}
 	}
 
-	public void createRelease(String id, String versionNumber,
-			BuildLogger buildLogger) {
+	public void createRelease(String ProjectId, String versionNumber,
+			List<SelectedPackage> selectedPackages, BuildLogger buildLogger) {
 		buildLogger.addBuildLogEntry("Create release called...");
-		
 	}
 
 }
