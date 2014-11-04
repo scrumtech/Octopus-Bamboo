@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 
 import com.atlassian.bamboo.build.logger.BuildLogger;
 import com.google.gson.Gson;
@@ -50,9 +52,27 @@ public class Releases {
 		}
 	}
 
-	public void createRelease(String ProjectId, String versionNumber,
-			List<SelectedPackage> selectedPackages, BuildLogger buildLogger) {
-		buildLogger.addBuildLogEntry("Create release called...");
+	public void createRelease(String projectId, String versionNumber,
+			List<SelectedPackage> selectedPackages, BuildLogger buildLogger) throws ClientProtocolException, IOException {
+		buildLogger.addBuildLogEntry("Create release...");
+		
+		Gson gson = new Gson();
+		String jsonSelectedPackages =gson.toJson(selectedPackages); 
+		String jsonData = "{\"ProjectId\":\"" + projectId + "\","
+				+ "\"ReleaseNotes\":\"\","
+				+ "\"Version\":\"" + versionNumber + "\","
+				+ "\"SelectedPackages\":" + jsonSelectedPackages + "}";
+		
+		HttpPost postRequest = new HttpPost(
+				this.baseUrl + "/api/Releases");
+		postRequest.addHeader("accept", "application/json");
+		postRequest.addHeader("X-Octopus-ApiKey", this.apiKey);
+		StringEntity input = new StringEntity(jsonData);
+		postRequest.setEntity(input);
+		
+		buildLogger.addBuildLogEntry("Creating release with payload: " + jsonData);
+		
+		HttpClient.executeRequest(postRequest);
 	}
 
 }
