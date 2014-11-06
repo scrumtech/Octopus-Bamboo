@@ -1,4 +1,4 @@
-package com.nib.octopus;
+package com.scrumtech.octopus;
 
 import java.io.IOException;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package com.nib.octopus;
+package com.scrumtech.octopus;
 
 import com.atlassian.bamboo.build.logger.BuildLogger;
 

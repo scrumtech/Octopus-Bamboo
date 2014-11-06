@@ -1,4 +1,4 @@
-package com.nib.octopus;
+package com.scrumtech.octopus;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ public class DeploymentProcess {
 	public String LastReleaseVersion;
 	public String NextVersionIncrement;
 	public String VersioningPackageStepName;
-	public List<com.nib.octopus.Package> Packages;
+	public List<com.scrumtech.octopus.Package> Packages;
 	
 	public DeploymentProcess() {
 		

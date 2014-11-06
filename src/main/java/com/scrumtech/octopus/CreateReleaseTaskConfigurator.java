@@ -1,4 +1,4 @@
-package com.nib.octopus;
+package com.scrumtech.octopus;
 
 import com.atlassian.bamboo.collections.ActionParametersMap;
 import com.atlassian.bamboo.task.AbstractTaskConfigurator;
@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-public class DeployTaskConfigurator extends AbstractTaskConfigurator {
+public class CreateReleaseTaskConfigurator extends AbstractTaskConfigurator {
 
     private DefaultTextProvider textProvider;
 
@@ -25,7 +25,6 @@ public class DeployTaskConfigurator extends AbstractTaskConfigurator {
         config.put("apiKey", params.getString("apiKey"));
         config.put("projectName", params.getString("projectName"));
         config.put("version", params.getString("version"));
-        config.put("environment", params.getString("environment"));
 
         return config;
     }
@@ -39,7 +38,6 @@ public class DeployTaskConfigurator extends AbstractTaskConfigurator {
         context.put("apiKey", "API-KOTGRIJSZRNPTEPFGU1WLB8KVWE");
         context.put("projectName", "");
         context.put("version", "");
-        context.put("environment", "");
     }
 
     @Override
@@ -51,7 +49,6 @@ public class DeployTaskConfigurator extends AbstractTaskConfigurator {
         context.put("apiKey", taskDefinition.getConfiguration().get("apiKey"));
         context.put("projectName", taskDefinition.getConfiguration().get("projectName"));
         context.put("version", taskDefinition.getConfiguration().get("version"));
-        context.put("environment", taskDefinition.getConfiguration().get("environment"));
     }
 
     @Override
@@ -62,7 +59,6 @@ public class DeployTaskConfigurator extends AbstractTaskConfigurator {
         context.put("apiKey", taskDefinition.getConfiguration().get("apiKey"));
         context.put("projectName", taskDefinition.getConfiguration().get("projectName"));
         context.put("version", taskDefinition.getConfiguration().get("version"));
-        context.put("environment", taskDefinition.getConfiguration().get("environment"));
     }
 
     @Override
@@ -73,31 +69,25 @@ public class DeployTaskConfigurator extends AbstractTaskConfigurator {
         final String serverUrlValue = params.getString("serverUrl");
         if (StringUtils.isEmpty(serverUrlValue))
         {
-            errorCollection.addError("serverUrl", textProvider.getText("com.nib.octopus.serverUrl.error"));
+            errorCollection.addError("serverUrl", textProvider.getText("com.scrumtech.octopus.serverUrl.error"));
         }
         
         final String apiKeyValue = params.getString("apiKey");
         if (StringUtils.isEmpty(apiKeyValue))
         {
-            errorCollection.addError("apiKey", textProvider.getText("com.nib.octopus.apiKey.error"));
+            errorCollection.addError("apiKey", textProvider.getText("com.scrumtech.octopus.apiKey.error"));
         }
         
         final String projectNameValue = params.getString("projectName");
         if (StringUtils.isEmpty(projectNameValue))
         {
-            errorCollection.addError("projectName", textProvider.getText("com.nib.octopus.projectName.error"));
+            errorCollection.addError("projectName", textProvider.getText("com.scrumtech.octopus.projectName.error"));
         }
         
         final String versionValue = params.getString("version");
         if (StringUtils.isEmpty(versionValue))
         {
-            errorCollection.addError("version", textProvider.getText("com.nib.octopus.version.error"));
-        }
-        
-        final String environmentValue = params.getString("environment");
-        if (StringUtils.isEmpty(environmentValue))
-        {
-            errorCollection.addError("environment", textProvider.getText("com.nib.octopus.environment.error"));
+            errorCollection.addError("version", textProvider.getText("com.scrumtech.octopus.version.error"));
         }
     }
 

@@ -5,13 +5,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.nib.octopus</groupId>
+    <groupId>com.scrumtech.octopus</groupId>
     <artifactId>Octopus-Bamboo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <organization>
-        <name>nib healthfunds ltd</name>
-        <url>http://www.nib.com.au/</url>
+        <name>ScrumTech</name>
+        <url>http://www.scrumtech.com.au/</url>
     </organization>
 
     <name>Octopus-Bamboo</name>

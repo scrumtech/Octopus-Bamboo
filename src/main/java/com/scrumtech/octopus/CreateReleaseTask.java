@@ -1,4 +1,4 @@
-package com.nib.octopus;
+package com.scrumtech.octopus;
 
 import com.atlassian.bamboo.build.logger.BuildLogger;
 import com.atlassian.bamboo.task.CommonTaskContext;
@@ -9,7 +9,7 @@ import com.atlassian.bamboo.task.CommonTaskType;
 
 import org.jetbrains.annotations.NotNull;
 
-public class DeployTask implements CommonTaskType 
+public class CreateReleaseTask implements CommonTaskType 
 {
 	@Override
 	@NotNull
@@ -22,7 +22,6 @@ public class DeployTask implements CommonTaskType
         final String apiKey = taskContext.getConfigurationMap().get("apiKey");
         final String projectName = taskContext.getConfigurationMap().get("projectName");
         final String version = taskContext.getConfigurationMap().get("version");
-        final String environment = taskContext.getConfigurationMap().get("environment");
         
         TaskResultBuilder builder = TaskResultBuilder.newBuilder(taskContext);
 
@@ -30,14 +29,13 @@ public class DeployTask implements CommonTaskType
         buildLogger.addBuildLogEntry("API Key: " + apiKey);
         buildLogger.addBuildLogEntry("Project Name: " + projectName);
         buildLogger.addBuildLogEntry("Version: " + version);
-        buildLogger.addBuildLogEntry("Environment: " + environment);
         
         try {
-        	DeployReleaseCommand command = new DeployReleaseCommand(environment, projectName, version, serverUrl, apiKey, buildLogger);
+        	CreateReleaseCommand command = new CreateReleaseCommand(projectName, version, serverUrl, apiKey, buildLogger);
         	command.Execute();
         }
         catch (Exception e) {
-        	buildLogger.addErrorLogEntry("Error occured during deployment", e);
+        	buildLogger.addErrorLogEntry("Error occured while creating release.", e);
         	return builder.failed().build();
         }
 
