@@ -21,8 +21,8 @@ public class DeployTask implements CommonTaskType
         final String serverUrl = taskContext.getConfigurationMap().get("serverUrl");
         final String apiKey = taskContext.getConfigurationMap().get("apiKey");
         final String projectName = taskContext.getConfigurationMap().get("projectName");
-        final String version = taskContext.getConfigurationMap().get("version");
-        final String environment = taskContext.getConfigurationMap().get("environment");
+        final String version = taskContext.getConfigurationMap().get("octopusVersion");
+        final String environment = taskContext.getConfigurationMap().get("octopusEnvironment");
         
         TaskResultBuilder builder = TaskResultBuilder.newBuilder(taskContext);
 

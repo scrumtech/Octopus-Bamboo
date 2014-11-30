@@ -21,7 +21,7 @@ public class CreateReleaseTask implements CommonTaskType
         final String serverUrl = taskContext.getConfigurationMap().get("serverUrl");
         final String apiKey = taskContext.getConfigurationMap().get("apiKey");
         final String projectName = taskContext.getConfigurationMap().get("projectName");
-        final String version = taskContext.getConfigurationMap().get("version");
+        final String version = taskContext.getConfigurationMap().get("octopusVersion");
         
         TaskResultBuilder builder = TaskResultBuilder.newBuilder(taskContext);
 

@@ -24,7 +24,7 @@ public class CreateReleaseTaskConfigurator extends AbstractTaskConfigurator {
         config.put("serverUrl", params.getString("serverUrl"));
         config.put("apiKey", params.getString("apiKey"));
         config.put("projectName", params.getString("projectName"));
-        config.put("version", params.getString("version"));
+        config.put("octopusVersion", params.getString("octopusVersion"));
 
         return config;
     }
@@ -35,9 +35,9 @@ public class CreateReleaseTaskConfigurator extends AbstractTaskConfigurator {
         super.populateContextForCreate(context);
 
         context.put("serverUrl", "http://octopusdeploy/");
-        context.put("apiKey", "API-KOTGRIJSZRNPTEPFGU1WLB8KVWE");
+        context.put("apiKey", "API-EOJEBOQKHX5DT70M1RAPFFTDPM");
         context.put("projectName", "");
-        context.put("version", "");
+        context.put("octopusVersion", "");
     }
 
     @Override
@@ -48,7 +48,7 @@ public class CreateReleaseTaskConfigurator extends AbstractTaskConfigurator {
         context.put("serverUrl", taskDefinition.getConfiguration().get("serverUrl"));
         context.put("apiKey", taskDefinition.getConfiguration().get("apiKey"));
         context.put("projectName", taskDefinition.getConfiguration().get("projectName"));
-        context.put("version", taskDefinition.getConfiguration().get("version"));
+        context.put("octopusVersion", taskDefinition.getConfiguration().get("octopusVersion"));
     }
 
     @Override
@@ -58,7 +58,7 @@ public class CreateReleaseTaskConfigurator extends AbstractTaskConfigurator {
         context.put("serverUrl", taskDefinition.getConfiguration().get("serverUrl"));
         context.put("apiKey", taskDefinition.getConfiguration().get("apiKey"));
         context.put("projectName", taskDefinition.getConfiguration().get("projectName"));
-        context.put("version", taskDefinition.getConfiguration().get("version"));
+        context.put("octopusVersion", taskDefinition.getConfiguration().get("octopusVersion"));
     }
 
     @Override
@@ -84,10 +84,10 @@ public class CreateReleaseTaskConfigurator extends AbstractTaskConfigurator {
             errorCollection.addError("projectName", textProvider.getText("com.scrumtech.octopus.projectName.error"));
         }
         
-        final String versionValue = params.getString("version");
+        final String versionValue = params.getString("octopusVersion");
         if (StringUtils.isEmpty(versionValue))
         {
-            errorCollection.addError("version", textProvider.getText("com.scrumtech.octopus.version.error"));
+            errorCollection.addError("octopusVersion", textProvider.getText("com.scrumtech.octopus.version.error"));
         }
     }
 

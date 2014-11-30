@@ -24,8 +24,8 @@ public class DeployTaskConfigurator extends AbstractTaskConfigurator {
         config.put("serverUrl", params.getString("serverUrl"));
         config.put("apiKey", params.getString("apiKey"));
         config.put("projectName", params.getString("projectName"));
-        config.put("version", params.getString("version"));
-        config.put("environment", params.getString("environment"));
+        config.put("octopusVersion", params.getString("octopusVersion"));
+        config.put("octopuEnvironment", params.getString("octopuEnvironment"));
 
         return config;
     }
@@ -36,10 +36,10 @@ public class DeployTaskConfigurator extends AbstractTaskConfigurator {
         super.populateContextForCreate(context);
 
         context.put("serverUrl", "http://octopusdeploy/");
-        context.put("apiKey", "API-KOTGRIJSZRNPTEPFGU1WLB8KVWE");
+        context.put("apiKey", "API-EOJEBOQKHX5DT70M1RAPFFTDPM");
         context.put("projectName", "");
-        context.put("version", "");
-        context.put("environment", "");
+        context.put("octopusVersion", "");
+        context.put("octopuEnvironment", "");
     }
 
     @Override
@@ -50,8 +50,8 @@ public class DeployTaskConfigurator extends AbstractTaskConfigurator {
         context.put("serverUrl", taskDefinition.getConfiguration().get("serverUrl"));
         context.put("apiKey", taskDefinition.getConfiguration().get("apiKey"));
         context.put("projectName", taskDefinition.getConfiguration().get("projectName"));
-        context.put("version", taskDefinition.getConfiguration().get("version"));
-        context.put("environment", taskDefinition.getConfiguration().get("environment"));
+        context.put("octopusVersion", taskDefinition.getConfiguration().get("octopusVersion"));
+        context.put("octopuEnvironment", taskDefinition.getConfiguration().get("octopuEnvironment"));
     }
 
     @Override
@@ -61,8 +61,8 @@ public class DeployTaskConfigurator extends AbstractTaskConfigurator {
         context.put("serverUrl", taskDefinition.getConfiguration().get("serverUrl"));
         context.put("apiKey", taskDefinition.getConfiguration().get("apiKey"));
         context.put("projectName", taskDefinition.getConfiguration().get("projectName"));
-        context.put("version", taskDefinition.getConfiguration().get("version"));
-        context.put("environment", taskDefinition.getConfiguration().get("environment"));
+        context.put("octopusVersion", taskDefinition.getConfiguration().get("octopusVersion"));
+        context.put("octopuEnvironment", taskDefinition.getConfiguration().get("octopuEnvironment"));
     }
 
     @Override
@@ -88,16 +88,16 @@ public class DeployTaskConfigurator extends AbstractTaskConfigurator {
             errorCollection.addError("projectName", textProvider.getText("com.scrumtech.octopus.projectName.error"));
         }
         
-        final String versionValue = params.getString("version");
+        final String versionValue = params.getString("octopusVersion");
         if (StringUtils.isEmpty(versionValue))
         {
-            errorCollection.addError("version", textProvider.getText("com.scrumtech.octopus.version.error"));
+            errorCollection.addError("octopusVersion", textProvider.getText("com.scrumtech.octopus.version.error"));
         }
         
-        final String environmentValue = params.getString("environment");
+        final String environmentValue = params.getString("octopuEnvironment");
         if (StringUtils.isEmpty(environmentValue))
         {
-            errorCollection.addError("environment", textProvider.getText("com.scrumtech.octopus.environment.error"));
+            errorCollection.addError("octopuEnvironment", textProvider.getText("com.scrumtech.octopus.environment.error"));
         }
     }
 
