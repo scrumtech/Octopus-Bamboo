@@ -26,7 +26,7 @@ public class Deployments {
 	}
 	
 	public void DeployRelease(String project, String release, String environment, BuildLogger buildLogger)
-			throws IllegalStateException, IOException, ParseException {
+			throws IllegalStateException, IOException, ParseException, DeploymentFailedException {
 		
 		HttpPost postRequest = new HttpPost(
 				this.baseUrl + "/api/Deployments");
@@ -54,7 +54,7 @@ public class Deployments {
 	}
 
 	private void WaitForDeploymentToComplete(String deploymentId, BuildLogger buildLogger)
-			throws IOException, ParseException {
+			throws IOException, ParseException, DeploymentFailedException {
 		int totalRunTime = 0;
 		// get the deployment server task ID
 		HttpGet getRequest = new HttpGet(
@@ -102,6 +102,7 @@ public class Deployments {
 				} else {
 					buildLogger.addErrorLogEntry(taskDescription + ": "
 							+ taskState + ", " + taskErrorMessage);
+					throw new DeploymentFailedException();
 				}
 
 				// output raw log
